@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scholar_store_app/models/product_model.dart';
-import 'package:scholar_store_app/services/all_product_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_store_app/cubits/products_cubit/products_cubit.dart';
+import 'package:scholar_store_app/cubits/products_cubit/products_state.dart';
 import 'package:scholar_store_app/widgets/custom_card.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -26,12 +27,18 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      // بما ان الداتا بتجي من الانترنت لازم نستخدم FutureBuilder
-      body: FutureBuilder<List<ProductModel>>(
-        future: AllProductService().getAllProducts(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<ProductModel> products = snapshot.data!;
+      body: BlocConsumer<ProductsCubit, ProductsState>(
+        listener: (context, state) {
+          if (state is ProductsFailure) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          }
+        },
+        builder: (context, state) {
+          if (state is ProductsLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is ProductsSuccess) {
             return Padding(
               padding: const EdgeInsets.only(
                 right: 10.0,
@@ -41,7 +48,7 @@ class HomePage extends StatelessWidget {
               child: GridView.builder(
                 clipBehavior: Clip.none,
                 physics: const BouncingScrollPhysics(),
-                itemCount: products.length,
+                itemCount: state.products.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 100,
@@ -49,12 +56,12 @@ class HomePage extends StatelessWidget {
                   childAspectRatio: 1.5,
                 ),
                 itemBuilder: (context, index) {
-                  return CustomCard(products: products[index]);
+                  return CustomCard(products: state.products[index]);
                 },
               ),
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Text('Something went wrong'));
           }
         },
       ),

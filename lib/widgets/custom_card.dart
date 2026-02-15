@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_store_app/cubits/products_cubit/products_cubit.dart';
 import 'package:scholar_store_app/models/product_model.dart';
 import 'package:scholar_store_app/screens/update_product_page.dart';
 
@@ -9,9 +11,15 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODo: Navigate to product details page (update product page)
-        Navigator.pushNamed(context, UpdateProductPage.id, arguments: products);
+      onTap: () async {
+        // بنستنى الصفحة تقفل (await)
+        await Navigator.pushNamed(
+          context,
+          UpdateProductPage.id,
+          arguments: products,
+        );
+        // أول ما يرجع، بنقول للـ Cubit بتاع الصفحة الرئيسية: "هات البيانات من تاني"
+        BlocProvider.of<ProductsCubit>(context).fetchAllProducts();
       },
       child: Stack(
         clipBehavior: Clip.none,

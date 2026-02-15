@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholar_store_app/cubits/products_cubit/products_cubit.dart';
 import 'package:scholar_store_app/screens/home_page.dart';
 import 'package:scholar_store_app/screens/update_product_page.dart';
 
@@ -11,13 +13,17 @@ class StoreApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: HomePage.id,
-      routes: {
-        HomePage.id: (context) => const HomePage(),
-        UpdateProductPage.id: (context) => const UpdateProductPage(),
-      },
+    return BlocProvider(
+      create: (context) => ProductsCubit()
+        ..fetchAllProducts(), // علامة ..fetchAllProducts معناها شغله أول ما يتكريت
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: HomePage.id,
+        routes: {
+          HomePage.id: (context) => const HomePage(),
+          UpdateProductPage.id: (context) => UpdateProductPage(),
+        },
+      ),
     );
   }
 }

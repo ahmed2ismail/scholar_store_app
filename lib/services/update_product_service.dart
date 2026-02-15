@@ -26,6 +26,7 @@ class UpdateProductService {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     );
+    // print('Update response data: $data'); // Debug print to check the response data
     return ProductModel.fromJson(data);
   }
 }
