@@ -19,6 +19,8 @@ class CustomCard extends StatelessWidget {
           arguments: products,
         );
         // أول ما يرجع، بنقول للـ Cubit بتاع الصفحة الرئيسية: "هات البيانات من تاني"
+        if (!context.mounted) return;
+        // 3. لو الصفحة لسه موجودة، نادى المدير وحدث البيانات
         BlocProvider.of<ProductsCubit>(context).fetchAllProducts();
       },
       child: Stack(

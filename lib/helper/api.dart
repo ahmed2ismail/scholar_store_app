@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -15,7 +16,7 @@ class Api {
       // headers!['Authorization'] = 'Bearer $token';
       headers!.addAll({'Authorization': 'Bearer $token'});
     }
-    print('url: $_baseUrl$endpoint, headers: $headers, token: $token');
+    log('url: $_baseUrl$endpoint, headers: $headers, token: $token');
     final response = await http.get(Uri.parse('$_baseUrl$endpoint'));
     if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic data = jsonDecode(response.body); // Changed to dynamic
@@ -37,7 +38,7 @@ class Api {
       // headers!['Authorization'] = 'Bearer $token';
       headers!.addAll({'Authorization': 'Bearer $token'});
     }
-    print(
+    log(
       'url: $_baseUrl$endpoint, body: $body, headers: $headers, token: $token',
     );
     final response = await http.post(
@@ -69,7 +70,7 @@ class Api {
         'Content-Type': 'application/x-www-form-urlencoded',
       });
     }
-    print(
+    log(
       'url: $_baseUrl$endpoint, body: $body, headers: $headers, token: $token',
     );
     final response = await http.put(
@@ -95,7 +96,7 @@ class Api {
     if (token != null) {
       headers!.addAll({'Authorization': 'Bearer $token'});
     }
-    print('url: $_baseUrl$endpoint, headers: $headers, token: $token');
+    log('url: $_baseUrl$endpoint, headers: $headers, token: $token');
     final response = await http.delete(
       Uri.parse('$_baseUrl$endpoint'),
       headers: headers,

@@ -1,5 +1,7 @@
 // fourth step to create a service to add a product to the API
 // خدمة إضافة منتج جديد إلى ال API
+import 'dart:developer';
+
 import 'package:scholar_store_app/helper/api.dart';
 import 'package:scholar_store_app/models/product_model.dart';
 
@@ -26,6 +28,7 @@ class AddProductService {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       // },
     );
+    log('Product added successfully: ${data['title']}');
     // تحويل الاستجابة القادمة من الـ API إلى ProductModel
     return ProductModel.fromJson(data);
   }
