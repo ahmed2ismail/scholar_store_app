@@ -21,17 +21,16 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   @override
   Widget build(BuildContext context) {
     ProductModel product =
-        ModalRoute.of(context)!.settings.arguments
-            as ProductModel; // No changes here, just for context
+        ModalRoute.of(context)!.settings.arguments as ProductModel; // No changes here, just for context
     return Scaffold(
       // Using ModalProgressHUD here can be complex with async/await inside onTap.
       // A simpler approach for now is to manage the loading state directly.
       appBar: AppBar(
-        title: Text('Update Product', style: TextStyle(color: Colors.black)),
+        title: const Text('Update Product', style: TextStyle(color: Colors.black)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
@@ -40,21 +39,21 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
                 CustomTextField(
                   hintText: 'Product Name',
                   onChanged: (data) {
                     productName = data;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CustomTextField(
                   hintText: 'Description',
                   onChanged: (data) {
                     description = data;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CustomTextField(
                   hintText: 'Price',
                   keyboardType: TextInputType.number,
@@ -62,14 +61,14 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                     price = data;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CustomTextField(
                   hintText: 'Image',
                   onChanged: (data) {
                     image = data;
                   },
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 CustomButton(
                   text: 'Update',
                   onTap: () async {
@@ -79,7 +78,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                     try {
                       await updateProduct(product);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Product updated successfully')),
+                        const SnackBar(content: Text('Product updated successfully')),
                       );
                     } on Exception catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(

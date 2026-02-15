@@ -8,6 +8,8 @@ class Api {
     String? endpoint,
     Map<String, String>? headers,
     String? token,
+    // token دي اللي هي ال authorization token اللي بتبعتها في ال headers عشان تقدر توصل لل api لو كانت محمية ب token
+    // وال toke دي زي مثلا token بتاع ال user اللي عامل login في التطبيق عشان يقدر يوصل لل api ويجيب بياناته الشخصية او يعمل اي حاجة محتاجة authentication
   }) async {
     if (token != null) {
       // headers!['Authorization'] = 'Bearer $token';
@@ -15,7 +17,7 @@ class Api {
     }
     print('url: $_baseUrl$endpoint, headers: $headers, token: $token');
     final response = await http.get(Uri.parse('$_baseUrl$endpoint'));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       dynamic data = jsonDecode(response.body); // Changed to dynamic
       return data;
     } else {

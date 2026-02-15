@@ -23,7 +23,7 @@ class CustomCard extends StatelessWidget {
                   color: Colors.grey.withValues(alpha: 0.5),
                   spreadRadius: 1,
                   blurRadius: 10,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
             ),
@@ -43,18 +43,18 @@ class CustomCard extends StatelessWidget {
                       products.title.substring(0, 6),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           '\$${products.price}',
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.favorite),
+                          icon: const Icon(Icons.favorite),
                         ),
                       ],
                     ),

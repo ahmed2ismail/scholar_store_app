@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('New Trend', style: TextStyle(color: Colors.black)),
+        title: const Text('New Trend', style: TextStyle(color: Colors.black)),
         centerTitle: true,
         elevation: 0,
         actions: [
@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
           // SizedBox(width: 20),
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.shopping_cart, color: Colors.black),
+            icon: const Icon(Icons.shopping_cart, color: Colors.black),
           ),
         ],
       ),
@@ -40,9 +40,9 @@ class HomePage extends StatelessWidget {
               ),
               child: GridView.builder(
                 clipBehavior: Clip.none,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 100,
                   crossAxisSpacing: 10,
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
